@@ -148,12 +148,25 @@
             <button class="carrossel-btn next" onclick="mudarSlideAgua(1)">&#10095;</button>
         </div>
         <div class="info-lanche">
-            <h2>Água Mineral</h2>
-            <ul>
-                <li>Com ou sem gás</li>
-                <li>500ml</li>
+        <h2>Água</h2>
+        <ul>
+            <li>
+                <span>Escolha o tipo:</span>
+                <div class="sabor-agua-group">
+                    <label class="sabor-agua-option">
+                        <input type="radio" name="sabor-agua" value="Água Mineral" checked>
+                        <span class="sabor-agua-box">Mineral</span>
+                    </label>
+                    <label class="sabor-agua-option">
+                        <input type="radio" name="sabor-agua" value="Água com Gás">
+                        <span class="sabor-agua-box">Com Gás</span>
+                    </label>
+                </div>
+            </li>
+            <li>500ml</li>
+        </ul>
             </ul>
-            <p class="preco">R$ 4,00</p>
+            <p class="preco">R$ 3,00 (Mineral) / R$ 4,00 (Com Gás)</p>
             <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
         </div>
     </div>
@@ -208,74 +221,132 @@
 
 
 <script>
-// Carrossel exclusivo do refrigerante
-// Controla o carrossel de imagens do refrigerante
+// --- Sincroniza seleção do sabor com o carrossel do REFRIGERANTE ---
 let slideAtualRefri = 0;
 const carrosselRefri = document.getElementById('carrossel-refri');
 const slidesRefri = carrosselRefri.querySelectorAll('.carrossel-img');
 
 function mostrarSlideRefri(n) {
-    slideAtualRefri += n;
+    slideAtualRefri = n;
     if (slideAtualRefri >= slidesRefri.length) slideAtualRefri = 0;
     if (slideAtualRefri < 0) slideAtualRefri = slidesRefri.length - 1;
     slidesRefri.forEach((img, i) => {
         img.classList.toggle('active', i === slideAtualRefri);
     });
+    // Marca o radio correspondente ao slide
+    const radios = document.querySelectorAll('input[name="sabor-refri"]');
+    if (radios[slideAtualRefri]) radios[slideAtualRefri].checked = true;
 }
-// Inicializa o carrossel do refrigerante
 mostrarSlideRefri(0);
-window.mudarSlideRefri = mostrarSlideRefri;
-</script>
+window.mudarSlideRefri = function(n) {
+    mostrarSlideRefri((slideAtualRefri + n + slidesRefri.length) % slidesRefri.length);
+};
+document.querySelectorAll('input[name="sabor-refri"]').forEach((radio, idx) => {
+    radio.addEventListener('change', function() {
+        if (this.checked) mostrarSlideRefri(idx);
+    });
+});
 
-<script>
-// Carrossel do suco
-// Controla o carrossel de imagens do suco
+// --- Sincroniza seleção do sabor com o carrossel do SUCO ---
 let slideAtualSuco = 0;
 const carrosselSuco = document.getElementById('carrossel-suco');
 const slidesSuco = carrosselSuco.querySelectorAll('.carrossel-img-suco');
 
 function mostrarSlideSuco(n) {
-    slideAtualSuco += n;
+    slideAtualSuco = n;
     if (slideAtualSuco >= slidesSuco.length) slideAtualSuco = 0;
     if (slideAtualSuco < 0) slideAtualSuco = slidesSuco.length - 1;
     slidesSuco.forEach((img, i) => {
         img.classList.toggle('active', i === slideAtualSuco);
     });
+    // Marca o radio correspondente ao slide
+    const radios = document.querySelectorAll('input[name="sabor-suco"]');
+    if (radios[slideAtualSuco]) radios[slideAtualSuco].checked = true;
 }
-// Inicializa o carrossel do suco
 mostrarSlideSuco(0);
-window.mudarSlideSuco = mostrarSlideSuco;
+window.mudarSlideSuco = function(n) {
+    mostrarSlideSuco((slideAtualSuco + n + slidesSuco.length) % slidesSuco.length);
+};
+document.querySelectorAll('input[name="sabor-suco"]').forEach((radio, idx) => {
+    radio.addEventListener('change', function() {
+        if (this.checked) mostrarSlideSuco(idx);
+    });
+});
 
-// Script para adicionar itens ao pedido (localStorage)
-// Este é o ÚNICO script que deve adicionar pedidos!
+// --- Sincroniza seleção do tipo com o carrossel da ÁGUA ---
+let slideAtualAgua = 0;
+const carrosselAgua = document.getElementById('carrossel-agua');
+const slidesAgua = carrosselAgua.querySelectorAll('.carrossel-img-agua');
+
+function mostrarSlideAgua(n) {
+    slideAtualAgua = n;
+    if (slideAtualAgua >= slidesAgua.length) slideAtualAgua = 0;
+    if (slideAtualAgua < 0) slideAtualAgua = slidesAgua.length - 1;
+    slidesAgua.forEach((img, i) => {
+        img.classList.toggle('active', i === slideAtualAgua);
+    });
+    // Marca o radio correspondente ao slide
+    const radios = document.querySelectorAll('input[name="sabor-agua"]');
+    if (radios[slideAtualAgua]) radios[slideAtualAgua].checked = true;
+}
+mostrarSlideAgua(0);
+window.mudarSlideAgua = function(n) {
+    mostrarSlideAgua((slideAtualAgua + n + slidesAgua.length) % slidesAgua.length);
+};
+document.querySelectorAll('input[name="sabor-agua"]').forEach((radio, idx) => {
+    radio.addEventListener('change', function() {
+        if (this.checked) mostrarSlideAgua(idx);
+    });
+});
+
+// --- Adiciona ao carrinho com imagem e sabor/tipo corretos ---
 document.querySelectorAll('.btn-adicionar').forEach(btn => {
     btn.addEventListener('click', function(e) {
         const item = this.closest('.item-detalhado');
         const nome = item.querySelector('.info-lanche h2').innerText;
-        const preco = item.querySelector('.preco').innerText;
-        const img = item.querySelector('img') ? item.querySelector('img').getAttribute('src') : '';
-        // Pega a descrição (ingredientes)
+        let preco = item.querySelector('.preco').innerText;
+        let img = item.querySelector('img') ? item.querySelector('img').getAttribute('src') : '';
         let desc = '';
         const ul = item.querySelector('.info-lanche ul');
         if (ul) {
             desc = Array.from(ul.querySelectorAll('li')).map(li => li.innerText).join(', ');
         }
-        // Pega o sabor do refrigerante, se existir
+        // Refrigerante
         let saborRefri = '';
         const saborRadioRefri = item.querySelector('input[name="sabor-refri"]:checked');
         if (saborRadioRefri) {
             saborRefri = saborRadioRefri.value;
+            const radios = Array.from(item.querySelectorAll('input[name="sabor-refri"]'));
+            const idx = radios.findIndex(r => r.checked);
+            const imgs = item.parentElement.querySelectorAll('.carrossel-img');
+            if (imgs[idx]) img = imgs[idx].getAttribute('src');
         }
-        // Pega o sabor do suco, se existir
+        // Suco
         let saborSuco = '';
         const saborRadioSuco = item.querySelector('input[name="sabor-suco"]:checked');
         if (saborRadioSuco) {
             saborSuco = saborRadioSuco.value;
+            const radios = Array.from(item.querySelectorAll('input[name="sabor-suco"]'));
+            const idx = radios.findIndex(r => r.checked);
+            const imgs = item.parentElement.querySelectorAll('.carrossel-img-suco');
+            if (imgs[idx]) img = imgs[idx].getAttribute('src');
+        }
+        // Água
+        let tipoAgua = '';
+        const saborRadioAgua = item.querySelector('input[name="sabor-agua"]:checked');
+        if (saborRadioAgua) {
+            tipoAgua = saborRadioAgua.value;
+            const radios = Array.from(item.querySelectorAll('input[name="sabor-agua"]'));
+            const idx = radios.findIndex(r => r.checked);
+            const imgs = item.parentElement.querySelectorAll('.carrossel-img-agua');
+            if (imgs[idx]) img = imgs[idx].getAttribute('src');
+            preco = tipoAgua === 'Água Mineral' ? 'R$ 3,00' : 'R$ 4,00';
         }
 
         let nomeFinal = nome;
         if (saborRefri) nomeFinal += ` (${saborRefri})`;
         if (saborSuco) nomeFinal += ` (${saborSuco})`;
+        if (tipoAgua) nomeFinal += ` (${tipoAgua})`;
 
         let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
         pedidos.push({ nome: nomeFinal, preco, img, desc });
@@ -287,9 +358,7 @@ document.querySelectorAll('.btn-adicionar').forEach(btn => {
 <script>
 // Carrossel da água
 // Controla o carrossel de imagens da água
-let slideAtualAgua = 0;
-const carrosselAgua = document.getElementById('carrossel-agua');
-const slidesAgua = carrosselAgua.querySelectorAll('.carrossel-img-agua');
+
 
 function mostrarSlideAgua(n) {
     slideAtualAgua += n;

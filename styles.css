@@ -317,7 +317,34 @@ body {
     color: #fff;
     border-color: #b8860b;
 }
-
+/* Seleção de tipo de água - igual ao suco */
+.sabor-agua-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+.sabor-agua-option {
+    position: relative;
+    cursor: pointer;
+}
+.sabor-agua-option input[type="radio"] {
+    display: none;
+}
+.sabor-agua-box {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    background: #fff8e1;
+    color: #b8860b;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.sabor-agua-option input[type="radio"]:checked + .sabor-agua-box {
+    background: #b8860b;
+    color: #fff;
+    border-color: #b8860b;
+}
 
 
 
