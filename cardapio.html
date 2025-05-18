@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="img/minhalogo.png" alt="Logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+            <a href="#">Pedidos</a>
+        </nav>
+    ...
+</header>
+<section class="cardapio-detalhado">
+    <div class="item-detalhado">
+        <img src="img/classico.png" alt="Hambúrguer Clássico">
+        <div class="info-lanche">
+            <h2>Hambúrguer Clássico</h2>
+            <ul>
+                <li>Pão artesanal</li>
+                <li>Hambúrguer 180g</li>
+                <li>Queijo cheddar</li>
+                <li>Alface e tomate</li>
+                <li>Molho especial</li>
+            </ul>
+            <p class="preco">R$ 25,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+
+    <div class="item-detalhado">
+        <img src="img/bacon.png" alt="Cheddar Bacon">
+        <div class="info-lanche">
+            <h2>Cheddar Bacon</h2>
+            <ul>
+                <li>Pão australiano</li>
+                <li>Hambúrguer 180g</li>
+                <li>Queijo cheddar duplo</li>
+                <li>Bacon crocante</li>
+                <li>Molho barbecue</li>
+            </ul>
+            <p class="preco">R$ 29,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+
+    <div class="item-detalhado">
+        <img src="img/duplo.png" alt="Duplo Especial">
+        <div class="info-lanche">
+            <h2>Duplo Especial</h2>
+            <ul>
+                <li>Pão brioche</li>
+                <li>2 Hambúrgueres 150g</li>
+                <li>Queijo prato</li>
+                <li>Alface, tomate e cebola</li>
+                <li>Molho da casa</li>
+            </ul>
+            <p class="preco">R$ 32,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+    </section>
+
+<h2 class="titulo-bebidas">Bebidas</h2>
+<section class="cardapio-detalhado">
+    <!-- Refrigerante -->
+    <div class="item-detalhado">
+        <div class="carrossel" id="carrossel-refri">
+            <img src="img/refri.png" alt="Coca-Cola" class="carrossel-img active">
+            <img src="img/guarana.png" alt="Guaraná" class="carrossel-img">
+            <img src="img/fanta.png" alt="Fanta" class="carrossel-img">
+            <button class="carrossel-btn prev" onclick="mudarSlideRefri(-1)">&#10094;</button>
+            <button class="carrossel-btn next" onclick="mudarSlideRefri(1)">&#10095;</button>
+        </div>
+        <div class="info-lanche">
+            <h2>Refrigerante Lata</h2>
+            <ul>
+    <li>
+        <span>Escolha o sabor:</span>
+        <div class="sabor-refri-group">
+            <label class="sabor-refri-option">
+                <input type="radio" name="sabor-refri" value="Coca-Cola" checked>
+                <span class="sabor-refri-box">Coca</span>
+            </label>
+            <label class="sabor-refri-option">
+                <input type="radio" name="sabor-refri" value="Guaraná">
+                <span class="sabor-refri-box">Guaraná</span>
+            </label>
+            <label class="sabor-refri-option">
+                <input type="radio" name="sabor-refri" value="Fanta">
+                <span class="sabor-refri-box">Fanta</span>
+            </label>
+        </div>
+    </li>
+    <li>350ml</li>
+</ul>
+            <p class="preco">R$ 7,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+    <!-- Suco -->
+    <div class="item-detalhado">
+        <div class="carrossel" id="carrossel-suco">
+            <img src="img/laranja.png" alt="Suco de Laranja" class="carrossel-img-suco active">
+            <img src="img/limao.png" alt="Suco de Limão" class="carrossel-img-suco">
+            <img src="img/maracuja.png" alt="Suco de Maracujá" class="carrossel-img-suco">
+            <button class="carrossel-btn prev" onclick="mudarSlideSuco(-1)">&#10094;</button>
+            <button class="carrossel-btn next" onclick="mudarSlideSuco(1)">&#10095;</button>
+        </div>
+        <div class="info-lanche">
+            <h2>Suco Natural</h2>
+            <ul>
+                <li>
+                    <span>Escolha o sabor:</span>
+                    <div class="sabor-suco-group">
+                        <label class="sabor-suco-option">
+                            <input type="radio" name="sabor-suco" value="Laranja" checked>
+                            <span class="sabor-suco-box">Laranja</span>
+                        </label>
+                        <label class="sabor-suco-option">
+                            <input type="radio" name="sabor-suco" value="Limão">
+                            <span class="sabor-suco-box">Limão</span>
+                        </label>
+                        <label class="sabor-suco-option">
+                            <input type="radio" name="sabor-suco" value="Maracujá">
+                            <span class="sabor-suco-box">Maracujá</span>
+                        </label>
+                    </div>
+                </li>
+                <li>300ml</li>
+            <p class="preco">R$ 8,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+    <!-- Água -->
+    <div class="item-detalhado">
+        <div class="carrossel" id="carrossel-agua">
+            <img src="img/mineral.png" alt="Água Sem Gás" class="carrossel-img-agua active">
+            <img src="img/gas.png" alt="Água Com Gás" class="carrossel-img-agua">
+            <button class="carrossel-btn prev" onclick="mudarSlideAgua(-1)">&#10094;</button>
+            <button class="carrossel-btn next" onclick="mudarSlideAgua(1)">&#10095;</button>
+        </div>
+        <div class="info-lanche">
+            <h2>Água Mineral</h2>
+            <ul>
+                <li>Com ou sem gás</li>
+                <li>500ml</li>
+            </ul>
+            <p class="preco">R$ 4,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+</section>
+<h2 class="titulo-combos">Combos</h2>
+<section class="cardapio-detalhado combos">
+    <div class="item-detalhado">
+        <img src="img/combocasal.png" alt="Combo Clássico">
+        <div class="info-lanche">
+            <h2>Combo Casal</h2>
+            <ul>
+                <li>Hambúrguer Duplo</li>
+                <li>Batata frita média</li>
+                <li>Refrigerante lata</li>
+            </ul>
+            <p class="preco">R$ 65,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+    <div class="item-detalhado">
+        <img src="img/combo2.png" alt="Combo Cheddar Bacon">
+        <div class="info-lanche">
+            <h2>Combo Kids</h2>
+            <ul>
+                <li>Hamburguer Clássico</li>
+                <li>Batata frita pequena</li>
+                <li>Suco natural</li>
+                <li>Personagem Cowboy</li>
+            </ul>
+            <p class="preco">R$ 45,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+    <div class="item-detalhado">
+        <img src="img/combo3.png" alt="Combo Família">
+        <div class="info-lanche">
+            <h2>Combo Família</h2>
+            <ul>
+                <li>2 Duplo Especial</li>
+                <li>2 Batatas grandes</li>
+                <li>2 Refrigerantes lata</li>
+            </ul>
+            <p class="preco">R$ 75,00</p>
+            <a href="pedidos.html" class="btn-adicionar">Adicionar</a>
+        </div>
+    </div>
+</section> 
+<footer>
+    <p>&copy; 2023 Rancho do Hambúrguer. Todos os direitos reservados.</p>
+    <p>Desenvolvido por Helloysa</p>
+</footer>
+
+
+<script>
+// Carrossel exclusivo do refrigerante
+// Controla o carrossel de imagens do refrigerante
+let slideAtualRefri = 0;
+const carrosselRefri = document.getElementById('carrossel-refri');
+const slidesRefri = carrosselRefri.querySelectorAll('.carrossel-img');
+
+function mostrarSlideRefri(n) {
+    slideAtualRefri += n;
+    if (slideAtualRefri >= slidesRefri.length) slideAtualRefri = 0;
+    if (slideAtualRefri < 0) slideAtualRefri = slidesRefri.length - 1;
+    slidesRefri.forEach((img, i) => {
+        img.classList.toggle('active', i === slideAtualRefri);
+    });
+}
+// Inicializa o carrossel do refrigerante
+mostrarSlideRefri(0);
+window.mudarSlideRefri = mostrarSlideRefri;
+</script>
+
+<script>
+// Carrossel do suco
+// Controla o carrossel de imagens do suco
+let slideAtualSuco = 0;
+const carrosselSuco = document.getElementById('carrossel-suco');
+const slidesSuco = carrosselSuco.querySelectorAll('.carrossel-img-suco');
+
+function mostrarSlideSuco(n) {
+    slideAtualSuco += n;
+    if (slideAtualSuco >= slidesSuco.length) slideAtualSuco = 0;
+    if (slideAtualSuco < 0) slideAtualSuco = slidesSuco.length - 1;
+    slidesSuco.forEach((img, i) => {
+        img.classList.toggle('active', i === slideAtualSuco);
+    });
+}
+// Inicializa o carrossel do suco
+mostrarSlideSuco(0);
+window.mudarSlideSuco = mostrarSlideSuco;
+
+// Script para adicionar itens ao pedido (localStorage)
+// Este é o ÚNICO script que deve adicionar pedidos!
+document.querySelectorAll('.btn-adicionar').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const item = this.closest('.item-detalhado');
+        const nome = item.querySelector('.info-lanche h2').innerText;
+        const preco = item.querySelector('.preco').innerText;
+        const img = item.querySelector('img') ? item.querySelector('img').getAttribute('src') : '';
+        // Pega a descrição (ingredientes)
+        let desc = '';
+        const ul = item.querySelector('.info-lanche ul');
+        if (ul) {
+            desc = Array.from(ul.querySelectorAll('li')).map(li => li.innerText).join(', ');
+        }
+        // Pega o sabor do refrigerante, se existir
+        let saborRefri = '';
+        const saborRadioRefri = item.querySelector('input[name="sabor-refri"]:checked');
+        if (saborRadioRefri) {
+            saborRefri = saborRadioRefri.value;
+        }
+        // Pega o sabor do suco, se existir
+        let saborSuco = '';
+        const saborRadioSuco = item.querySelector('input[name="sabor-suco"]:checked');
+        if (saborRadioSuco) {
+            saborSuco = saborRadioSuco.value;
+        }
+
+        let nomeFinal = nome;
+        if (saborRefri) nomeFinal += ` (${saborRefri})`;
+        if (saborSuco) nomeFinal += ` (${saborSuco})`;
+
+        let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+        pedidos.push({ nome: nomeFinal, preco, img, desc });
+        localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    });
+});
+</script>
+
+<script>
+// Carrossel da água
+// Controla o carrossel de imagens da água
+let slideAtualAgua = 0;
+const carrosselAgua = document.getElementById('carrossel-agua');
+const slidesAgua = carrosselAgua.querySelectorAll('.carrossel-img-agua');
+
+function mostrarSlideAgua(n) {
+    slideAtualAgua += n;
+    if (slideAtualAgua >= slidesAgua.length) slideAtualAgua = 0;
+    if (slideAtualAgua < 0) slideAtualAgua = slidesAgua.length - 1;
+    slidesAgua.forEach((img, i) => {
+        img.classList.toggle('active', i === slideAtualAgua);
+    });
+}
+// Inicializa o carrossel da água
+mostrarSlideAgua(0);
+window.mudarSlideAgua = mostrarSlideAgua;
+</script>
+
+</body>
+</html>

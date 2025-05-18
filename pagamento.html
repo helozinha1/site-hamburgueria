@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Rancho do Hambúrguer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="img/minhalogo.png" alt="Logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+            <a href="pedidos.html">Pedidos</a>
+            <a href="pagamento.html">Pagamento</a>
+        </nav>
+    </header>
+
+    <section class="pedido-container">
+        <h1>Pagamento</h1>
+        <div class="pedido-lista" id="resumo-pedido">
+            <!-- Resumo do pedido será preenchido via JS -->
+        </div>
+        <form class="pagamento-form">
+    <h2>Escolha a forma de pagamento</h2>
+    <label style="display: flex; align-items: center; gap: 8px;">
+        <input type="radio" name="pagamento" value="dinheiro" required>
+        <img src="img/dinheiro.png" alt="Dinheiro" style="width:28px; height:28px;">
+        Dinheiro
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px;">
+        <input type="radio" name="pagamento" value="cartao">
+        <img src="img/cartao.png" alt="Cartão" style="width:28px; height:28px;">
+        Cartão de Crédito/Débito
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px;">
+        <input type="radio" name="pagamento" value="pix">
+        <img src="img/pix.png" alt="PIX" style="width:28px; height:28px;">
+        PIX
+    </label>
+    <button type="submit" class="btn-adicionar">Finalizar Pagamento</button>
+</form>
+    </section>
+
+    <script>
+    // Mostra o resumo do pedido
+    window.onload = function() {
+        const lista = document.getElementById('resumo-pedido');
+        const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+        let total = 0;
+
+        lista.innerHTML = '';
+
+        pedidos.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'pedido-item pedido-item-img';
+            div.innerHTML = `
+                <img src="${item.img}" alt="${item.nome}" class="pedido-img">
+                <div>
+                    <strong>${item.nome}</strong><br>
+                    <span style="font-size:14px;color:#555">${item.desc}</span>
+                </div>
+                <span style="font-weight:bold">${item.preco}</span>
+            `;
+            lista.appendChild(div);
+
+            total += parseFloat(item.preco.replace('R$', '').replace(',', '.'));
+        });
+
+        const totalDiv = document.createElement('div');
+        totalDiv.className = 'pedido-total';
+        totalDiv.innerHTML = `<strong>Total:</strong><strong>R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
+        lista.appendChild(totalDiv);
+    };
+
+    // Finaliza o pagamento
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.pagamento-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pagamento realizado com sucesso! Obrigado pelo seu pedido.');
+            localStorage.removeItem('pedidos');
+            window.location.href = 'index.html';
+        });
+    });
+    </script>
+</body>
+</html>

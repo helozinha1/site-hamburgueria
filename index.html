@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+        <header>
+        <a href="index.html">
+            <img src="img/minhalogo.png" alt="Logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+            <a href="pedidos.html">Pedidos</a>
+        </nav>
+    </header>
+<div class="imagem-texto">
+    <img src="img/hamburguer.jpg" alt="Hamburguer">
+     <h1>Rancho do <br> Hambúrguer</h1>
+</div>
+<section class="ultimos-pedidos">
+    <h2>Últimos pedidos</h2>
+    <div id="lista-ultimos-pedidos">
+        <!-- Os pedidos recentes aparecerão aqui -->
+    </div>
+    <a href="pedidos.html" class="btn-adicionar" style="margin-top:16px;display:inline-block;">Ver todos os pedidos</a>
+</section>
+<div class="galeria">
+    <img src="img/lanche1.jpg" alt="Lanche 1">
+    <img src="img/lanche2.png" alt="Lanche 2">
+    <img src="img/lanche3.jpg" alt="Lanche 3">
+</div>
+<section class="sobre-nos">
+    <div class="sobre-nos-bg"></div>
+    <div class="sobre-nos-conteudo">
+        <h2>Sobre Nós</h2>
+        <p>
+         No Rancho do Hambúrguer, fazemos hambúrguer com paixão e ingredientes de verdade. 
+         Tudo é preparado com cuidado, do pão ao molho, pra garantir sabor de verdade em cada mordida. 
+         Se você ama um bom burger, chegou ao lugar certo!
+        </p>
+    </div>
+</section>
+<script>
+// Mostra até 3 últimos pedidos na home
+window.onload = function() {
+    const lista = document.getElementById('lista-ultimos-pedidos');
+    if (!lista) return;
+    const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    if (pedidos.length === 0) {
+        lista.innerHTML = '<p>Nenhum pedido adicionado ainda.</p>';
+        return;
+    }
+    // Mostra os 3 últimos pedidos
+    pedidos.slice(-3).reverse().forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'pedido-item pedido-item-img';
+        div.innerHTML = `
+            <img src="${item.img}" alt="${item.nome}" class="pedido-img" style="width:40px;height:40px;">
+            <span style="font-weight:bold">${item.nome}</span>
+            <span style="margin-left:auto">${item.preco}</span>
+        `;
+        lista.appendChild(div);
+    });
+};
+</script>
+    
+</body>
+</html>
