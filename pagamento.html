@@ -15,44 +15,59 @@
             <a href="index.html">Home</a>
             <a href="cardapio.html">Cardápio</a>
             <a href="pedidos.html">Pedidos</a>
-            <a href="pagamento.html">Pagamento</a>
         </nav>
     </header>
 
     <section class="pedido-container">
         <h1>Pagamento</h1>
+        <!-- Exibe os dados do cliente -->
+        <div class="dados-entrega" id="dados-entrega"></div>
         <div class="pedido-lista" id="resumo-pedido">
-            <!-- Resumo do pedido será preenchido via JS -->
+          <!-- Resumo do pedido será preenchido via JS -->
         </div>
+    
         <form class="pagamento-form">
-    <h2>Escolha a forma de pagamento</h2>
-    <label style="display: flex; align-items: center; gap: 8px;">
-        <input type="radio" name="pagamento" value="dinheiro" required>
-        <img src="img/dinheiro.png" alt="Dinheiro" style="width:28px; height:28px;">
-        Dinheiro
-    </label>
-    <label style="display: flex; align-items: center; gap: 8px;">
-        <input type="radio" name="pagamento" value="cartao">
-        <img src="img/cartao.png" alt="Cartão" style="width:28px; height:28px;">
-        Cartão de Crédito/Débito
-    </label>
-    <label style="display: flex; align-items: center; gap: 8px;">
-        <input type="radio" name="pagamento" value="pix">
-        <img src="img/pix.png" alt="PIX" style="width:28px; height:28px;">
-        PIX
-    </label>
-    <button type="submit" class="btn-adicionar">Finalizar Pagamento</button>
-</form>
-
+            <div class="pagamento-opcoes">
+                <label class="pagamento-card">
+                    <input type="radio" name="pagamento" value="dinheiro" required>
+                    <img src="img/dinheiro.png" alt="Dinheiro">
+                    <span>Dinheiro</span>
+                </label>
+                <label class="pagamento-card">
+                    <input type="radio" name="pagamento" value="cartao">
+                    <img src="img/cartao.png" alt="Cartão">
+                    <span>Cartão de Crédito/Débito</span>
+                </label>
+                <label class="pagamento-card">
+                    <input type="radio" name="pagamento" value="pix">
+                    <img src="img/pix.png" alt="PIX">
+                    <span>PIX</span>
+                </label>
+            </div>
+            <button type="submit" class="btn-adicionar">Finalizar Pagamento</button>
+        </form>
     </section>
     <footer>
-    <p>&copy; 2025 Rancho do Hambúrguer. Todos os direitos reservados.</p>
-    <p>Desenvolvido por Helloysa</p>
-</footer>
+        <p>&copy; 2025 Rancho do Hambúrguer. Todos os direitos reservados.</p>
+        <p>Desenvolvido por Helloysa</p>
+    </footer>
 
     <script>
-    // Mostra o resumo do pedido
+    // Mostra o resumo do pedido e os dados do cliente
     window.onload = function() {
+        // Exibe dados do cliente
+        const dados = JSON.parse(localStorage.getItem('dadosEntrega'));
+        if (dados) {
+            document.getElementById('dados-entrega').innerHTML = `
+                <div style="margin-bottom:18px; background:#fff8e1; border-radius:10px; padding:16px 18px; box-shadow:0 2px 8px #b8860b22;">
+                    <strong>Nome:</strong> ${dados.nome}<br>
+                    <strong>Endereço:</strong> ${dados.endereco}<br>
+                    <strong>Telefone:</strong> ${dados.telefone}
+                </div>
+            `;
+        }
+
+        // Resumo do pedido
         const lista = document.getElementById('resumo-pedido');
         const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
         let total = 0;
@@ -85,12 +100,62 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.pagamento-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Pagamento realizado com sucesso! Obrigado pelo seu pedido.');
             localStorage.removeItem('pedidos');
-            window.location.href = 'index.html';
+            window.location.href = 'pagamento-concluido.html';
         });
     });
-    </script>
+    window.onload = function() {
+    // Exibe dados do cliente
+    const dados = JSON.parse(localStorage.getItem('dadosEntrega'));
+    if (dados) {
+        document.getElementById('dados-entrega').innerHTML = `
+            <div style="margin-bottom:18px; background:#fff8e1; border-radius:10px; padding:16px 18px; box-shadow:0 2px 8px #b8860b22;">
+                <strong>Nome:</strong> ${dados.nome}<br>
+                <strong>Endereço:</strong> ${dados.endereco}<br>
+                <strong>Telefone:</strong> ${dados.telefone}
+            </div>
+        `;
+    }
 
+    // Resumo do pedido
+    const lista = document.getElementById('resumo-pedido');
+    const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    let total = 0;
+    const taxaEntrega = 5.00; // Defina o valor da taxa de entrega
+
+    lista.innerHTML = '';
+
+    pedidos.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'pedido-item pedido-item-img';
+        div.innerHTML = `
+            <img src="${item.img}" alt="${item.nome}" class="pedido-img">
+            <div>
+                <strong>${item.nome}</strong><br>
+                <span style="font-size:14px;color:#555">${item.desc}</span>
+            </div>
+            <span style="font-weight:bold">${item.preco}</span>
+        `;
+        lista.appendChild(div);
+
+        total += parseFloat(item.preco.replace('R$', '').replace(',', '.'));
+    });
+
+    // Adiciona a taxa de entrega
+    const taxaDiv = document.createElement('div');
+    taxaDiv.className = 'pedido-total';
+    taxaDiv.innerHTML = `<span>Taxa de entrega:</span><span>R$ ${taxaEntrega.toFixed(2).replace('.', ',')}</span>`;
+    lista.appendChild(taxaDiv);
+
+    // Exibe o total final (produtos + taxa)
+    const totalDiv = document.createElement('div');
+    totalDiv.className = 'pedido-total';
+    totalDiv.innerHTML = `<strong>Total:</strong><strong>R$ ${(total + taxaEntrega).toFixed(2).replace('.', ',')}</strong>`;
+    lista.appendChild(totalDiv);
+};
+
+  
+
+    </script>
 </body>
 </html>

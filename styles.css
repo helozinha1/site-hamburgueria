@@ -434,3 +434,106 @@ footer {
     padding: 8px 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
+/* Pagamento concluído */
+.pagamento-sucesso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.circulo-verde {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgb(34, 197, 94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 0 24px rgba(34,197,94,0.3);
+    animation: pulse 1s;
+}
+
+.certo {
+    color: #fff;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.7); opacity: 0.5; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.pagamento-sucesso h2 {
+    color: #228b22;
+    margin-top: 0;
+    font-size: 2rem;
+    font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
+}
+.pagamento-opcoes {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.pagamento-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #b8860b;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(184,134,11,0.08);
+    min-width: 90px;
+    max-width: 120px;
+    position: relative;
+}
+
+.pagamento-card input[type="radio"] {
+    display: none;
+}
+
+.pagamento-card img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
+}
+
+.pagamento-card span {
+    font-size: 14px;
+    color: #b8860b;
+    font-weight: bold;
+}
+
+
+.pagamento-card input[type="radio"]:checked ~ span,
+.pagamento-card input[type="radio"]:checked ~ img {
+    filter: drop-shadow(0 0 6px #b8860b88);
+}
+
+.pagamento-card:has(input[type="radio"]:checked) {
+    border: 2.5px solid #228b22;
+    box-shadow: 0 0 0 4px #228b2222;
+    background: #f6fff6;
+}
+.pagamento-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagamento-form button {
+    width: 300px;
+    margin: 24px auto 0 auto;
+    display: block;
+    align-self: center;
+}
